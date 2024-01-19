@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пошук людини</title>
+</head>
+<body>
+    <h1>Пошук людини</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="photo1">Виберіть фотографію людини:</label>
+        <input type="file" name="photo1" accept="image/*" required>
+        
+        <label for="photo2">Виберіть фотографію на якій хочете знайти людину:</label>
+        <input type="file" name="photo2" accept="image/*" required>
+        
+        <button type="submit">Знайти</button>
+    </form>
+    
+    {% if result_image %}
+        <h2>Результат:</h2>
+        <img src="data:image/jpeg;base64,{{ result_image }}" alt="Результат порівняння">
+    {% endif %}
+    
+    <p><a href="{% url 'about' %}">Про програму</a></p>
+</body>
+</html>
+
